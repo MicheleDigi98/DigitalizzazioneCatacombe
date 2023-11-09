@@ -1,0 +1,17 @@
+.Pedina{
+  aspect-ratio: 1 / 1;
+  display: block;
+  position: absolute;
+  width: 120px;
+
+  overflow: hidden;
+  transform-origin: center;
+
+  >.ImmaginePedina{
+    display: block;
+    height: 400%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

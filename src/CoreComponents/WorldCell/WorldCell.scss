@@ -1,0 +1,83 @@
+@import "../../variables";
+
+.WorldCell{
+  aspect-ratio: 1 / 1;
+  position: absolute;
+
+  >.WorldCellImage{
+    position: absolute;
+    background-position: center;
+    background-size: cover;
+
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  >.CellaNonAdiacente{
+    position: absolute;
+    transform-origin: center;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+
+    &::after{
+      content: "";
+      display: block;
+      width: 100%;
+      height: 10%;
+      background: linear-gradient(180deg, $backgroundColor 30%, transparent 100%);
+    }
+  }
+
+  >.StanzaCentrale{
+    display: block;
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
+  }
+
+  >.Corridoio{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    >.ImmagineCorridoio{
+      content: "";
+      display: block;
+      position: absolute;
+      width: 25%;
+      height: 25%;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-size: cover;
+    }
+  }
+
+  >.StanzaMultiFrame{
+    display: block;
+    width: 50%;
+    height: 50%;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    >.MultiFrameImage{
+      display: block;
+      height: 100%;
+      position: absolute;
+    }
+  }
+}
