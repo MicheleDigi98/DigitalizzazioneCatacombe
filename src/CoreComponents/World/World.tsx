@@ -1,28 +1,11 @@
-import "./World.scss";
 import {WorldCell, WorldCellModel} from "../WorldCell/WorldCell";
-import React from "react";
+import React, {Fragment} from "react";
 import Camera from "../Camera/Camera";
 import ResourceManager from "../../Resources/ResourceManager";
 import {Pedina, PedinaModel} from "../Entity/Pedina/Pedina";
-
-export interface SkyboxProps{
-    skyboxImage: string,
-    numeroPosizione: number,
-    numeroImmagini: number,
-    posizioneSkybox: "Left" | "Back" | "Right" | "Bottom"
-}
-export const Skybox = (props: SkyboxProps) => {
-    return (
-        <div className={`SkyBox SB-${props.posizioneSkybox}`}>
-            <img
-                style={{
-                    transform: `translateX(${-((100 / props.numeroImmagini) * props.numeroPosizione)}%)`
-                }}
-                className={"SkyBoxImage"}
-                src={ResourceManager.Backgrounds().SkyBox}/>
-        </div>
-    )
-}
+import {Block} from "../Block/Block";
+import {Env3D, PianoCamera3D} from "../3DEnv/3DEnv";
+import {PiscinaCurativa} from "../../Models/PiscinaCurativa";
 
 export interface WorldProps{
     camera: Camera,
@@ -30,63 +13,78 @@ export interface WorldProps{
     pedine: PedinaModel[]
 }
 export const World = (props: WorldProps) => {
+    const testEnv = false;
+
     return (
-        <div
-            className={"WorldContainer"}>
-            <div
-                style={{
-                    width: `${props.camera.worldSize}px`
-                }}
-                className={"World"}>
-                <Skybox
-                    skyboxImage={ResourceManager.Backgrounds().SkyBox}
-                    numeroPosizione={1}
-                    numeroImmagini={6}
-                    posizioneSkybox={"Left"}/>
-                <Skybox
-                    skyboxImage={ResourceManager.Backgrounds().SkyBox}
-                    numeroPosizione={2}
-                    numeroImmagini={6}
-                    posizioneSkybox={"Back"}/>
-                <Skybox
-                    skyboxImage={ResourceManager.Backgrounds().SkyBox}
-                    numeroPosizione={3}
-                    numeroImmagini={6}
-                    posizioneSkybox={"Right"}/>
-                <Skybox
-                    skyboxImage={ResourceManager.Backgrounds().SkyBox}
-                    numeroPosizione={5}
-                    numeroImmagini={6}
-                    posizioneSkybox={"Bottom"}/>
+        <Env3D>
+            <PianoCamera3D
+                posizioneX={0}
+                posizioneY={0}
+                posizioneZ={testEnv ? 200 : 450}
+                rotazioneX={40}
+                rotazioneY={10}
+                rotazioneZ={0}>
                 {
-                    props.cells.map(
-                        cell =>
-                            <WorldCell
-                                key={cell.uID}
-                                uID={cell.uID}
-                                posX={cell.posX}
-                                posY={cell.posY}
-                                camera={props.camera}
-                                fullCell={cell.fullCell}
-                                puntiAdiacenti={cell.puntiAdiacenti}
-                                puntiAperti={cell.puntiAperti}
-                                tipoCella={cell.tipoCella}/>
-                    )
+                    false &&
+                    <Block
+                        posizioneX={0}
+                        posizioneY={25}
+                        posizioneZ={0}
+                        rotazioneZ={0}
+                        rotazioneX={0}
+                        rotazioneY={0}
+                        altezza={80}
+                        larghezza={150}
+                        lunghezza={50}
+                        trasparenza={0}
+                        immagini={{
+                            left: ResourceManager.Textures().MuroErba,
+                            right: ResourceManager.Textures().MuroErba,
+                            top: ResourceManager.Textures().MuroGrezzo,
+                            bottom: ResourceManager.Textures().MuroGrezzo,
+                            front: ResourceManager.Textures().MuroErba,
+                            back: ResourceManager.Textures().MuroErba
+                        }}
+                        colore={"gray"}/>
                 }
                 {
-                    props.pedine.map(
-                        pedina =>
-                            <Pedina
-                                camera={props.camera}
-                                immaginiPedina={pedina.immaginiPedina}
-                                nomePedina={pedina.nomePedina}
-                                posX={pedina.posX}
-                                posY={pedina.posY}
-                                orientamento={pedina.orientamento}
-                                movimento={pedina.movimento}/>
-                    )
+                    testEnv &&
+                    <Fragment>
+                        <PiscinaCurativa
+                            posizioneX={0}
+                            posizioneZ={0}
+                            dimensione={30}
+                            altezza={20}/>
+                    </Fragment>
                 }
-            </div>
-        </div>
+                {
+                    !testEnv &&
+                    props.cells.map(cell => (
+                        <WorldCell
+                            camera={props.camera}
+                            puntiAperti={cell.puntiAperti}
+                            uID={cell.uID}
+                            posX={cell.posX}
+                            posY={cell.posY}
+                            fullCell={cell.fullCell}
+                            tipoCella={cell.tipoCella}/>
+                    ))
+                }
+                {
+                    !testEnv &&
+                    props.pedine.map(pedina => (
+                        <Pedina
+                            camera={props.camera}
+                            immaginiPedina={pedina.immaginiPedina}
+                            nomePedina={pedina.nomePedina}
+                            posX={pedina.posX}
+                            posY={pedina.posY}
+                            orientamento={pedina.orientamento}
+                            movimento={pedina.movimento}/>
+                    ))
+                }
+
+            </PianoCamera3D>
+        </Env3D>
     )
 }

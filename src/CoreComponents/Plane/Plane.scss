@@ -1,4 +1,4 @@
-.Pedina{
+.Plane{
   display: block;
   position: absolute;
   top: 50%;
@@ -7,14 +7,10 @@
   transform-origin: center;
   background-size: cover;
 
+  &:not(.togliOmbra){
+    box-shadow: inset 0 0 20px 5px rgba(0, 0, 0, 0.7);
+  }
+
   perspective: 100000px;
   transform-style: preserve-3d;
-
-  >.ImmaginePedina{
-    display: block;
-    height: 400%;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
 }

@@ -12,7 +12,6 @@ export default class WorldData{
         posY: 0,
         fullCell: false,
         puntiAperti: PuntiGenerator(true, true, true, true),
-        puntiAdiacenti: PuntiGenerator(false, false, false, false),
         tipoCella: "normale",
     }];
 
@@ -113,12 +112,6 @@ export default class WorldData{
             uID: WorldData.cellUIDCounter++,
             posX,
             posY,
-            puntiAdiacenti: PuntiGenerator(
-                this.thereIsACell(posX - 1, posY),
-                this.thereIsACell(posX, posY - 1),
-                this.thereIsACell(posX + 1, posY),
-                this.thereIsACell(posX, posY + 1)
-            ),
             puntiAperti: PuntiGenerator(
                 this._generaPuntoAperto('left', from, posX, posY),
                 this._generaPuntoAperto('top', from, posX, posY),
@@ -190,28 +183,12 @@ export default class WorldData{
     }
 
     /**
-     * Aggiorna i punti aperti all'interno della mappa per ogni singola cella
-     * @private
-     */
-    private _updatePuntiAdiacenti(){
-        for(const tCell of this._cells){
-            tCell.puntiAdiacenti = PuntiGenerator(
-                this.thereIsACell(tCell.posX - 1, tCell.posY),
-                this.thereIsACell(tCell.posX, tCell.posY - 1),
-                this.thereIsACell(tCell.posX + 1, tCell.posY),
-                this.thereIsACell(tCell.posX, tCell.posY + 1)
-            )
-        }
-    }
-
-    /**
      * Aggiunge una nuova cella al mondo
      * @param cell Cella da aggiungere al mondo
      */
     public addCell(cell: WorldCellModel){
         if(cell && !this.thereIsACell(cell.posX, cell.posY)){
             this._cells.push(cell);
-            this._updatePuntiAdiacenti();
         }
     }
 

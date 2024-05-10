@@ -1,0 +1,78 @@
+.Block{
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform-origin: center;
+
+  perspective: 100000px;
+  transform-style: preserve-3d;
+
+  >.SezioneLaterale{
+    display: block;
+    position: absolute;
+    transform-origin: center;
+    background-size: cover;
+    box-shadow: inset 0 0 20px 5px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+
+    >.Immagine{
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background-size: cover;
+      transform-origin: center;
+      image-rendering: pixelated;
+    }
+
+    &.Right{
+      background-color: blue;
+      top: 0;
+      left: 100%;
+      height: 100%;
+      transform: translateX(-50%) rotateY(90deg);
+    }
+
+    &.Left{
+      background-color: green;
+      top: 0;
+      left: 0;
+      height: 100%;
+      transform: translateX(-50%) rotateY(90deg);
+    }
+
+    &.Front{
+      background-color: pink;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transform: translateY(-50%) rotateX(90deg);
+    }
+
+    &.Back{
+      background-color: purple;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      transform: translateY(-50%) rotateX(90deg);
+    }
+
+    &.Bottom{
+      background-color: yellow;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    &.Top{
+      background-color: blueviolet;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

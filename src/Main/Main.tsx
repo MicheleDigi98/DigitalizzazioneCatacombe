@@ -1,6 +1,6 @@
 import {World} from "../CoreComponents/World/World";
 import WorldData from "../CoreComponents/World/WorldData";
-import {useState} from "react";
+import React, {useState} from "react";
 import Camera from "../CoreComponents/Camera/Camera";
 import {PedinaModel} from "../CoreComponents/Entity/Pedina/Pedina";
 import ResourceManager from "../Resources/ResourceManager";
@@ -8,7 +8,7 @@ import ResourceManager from "../Resources/ResourceManager";
 export const Main = () => {
     const [worldData] = useState<WorldData>(new WorldData());
     const [currentPosition, setCurrentPosition] = useState<{posX: number, posY: number}>({posX: 0, posY: 0});
-    const [camera, setCamera] = useState<Camera>({posX: 0, posY: 0, cellSize: 500, zoom: 1, worldSize: 5000});
+    const [camera, setCamera] = useState<Camera>({posX: 0, posY: 0, cellSize: 500, zoom: 1, worldSize: 1000});
     const [pedina, setPedina] = useState<PedinaModel>({posX: 0, posY: 0, nomePedina: "Pippo", immaginiPedina: ResourceManager.Personaggi().Pippo, orientamento: "bottom", movimento: false})
 
     const goTo = (posX: number, posY: number) => {
@@ -19,8 +19,8 @@ export const Main = () => {
             worldData.addCell(cell);
 
             let steps = 60;
-            const stepX = (posX - currentPosition.posX + (-0.1 + Math.random() * 0.2)) / steps;
-            const stepY = (posY - currentPosition.posY + (-0.1 + Math.random() * 0.2)) / steps;
+            const stepX = (posX - currentPosition.posX + (-0.01 + Math.random() * 0.02)) / steps;
+            const stepY = (posY - currentPosition.posY + (-0.01 + Math.random() * 0.02)) / steps;
 
             setCurrentPosition({posX, posY});
             const interval = window.setInterval(() => {
@@ -46,12 +46,13 @@ export const Main = () => {
             gap: "10px"
         }}>
             <div style={{
+                backgroundColor: "black",
                 width: "100%",
                 height: '80%'
             }}>
                 <World
-                    cells={worldData.getCells()}
                     camera={camera}
+                    cells={worldData.getCells()}
                     pedine={[pedina]}/>
             </div>
             <span>

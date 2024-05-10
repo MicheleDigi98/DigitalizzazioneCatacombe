@@ -1,46 +1,41 @@
-import emptyCell from './Cells/EmptyCell.png';
-import fullCell from './Cells/FullCell.png';
-import corridoio from './Rooms/Corridoio.png';
-import stanza from './Rooms/Stanza.png';
-import piccoloCorridoio from './Rooms/PiccoloCorridoio.png';
-import piccoloMuro from './Rooms/PiccoloMuro.png';
-import stanzaCurativa from './Rooms/StanzaCurativa.png';
-import stanzaTeletrasporto from './Rooms/StanzaTeletrasporto.png';
-import blueCave from './Backgrounds/BlueCave.jpg';
-import darkCave from './Backgrounds/DarkCave.jpg';
-import skybox from './Backgrounds/SkyBox.png';
-import pippo from './Personaggi/Pippo.png';
+import MuroGrezzo from './Textures/MuroGrezzo.png';
+import TerrenoDrago from './Textures/TerrenoDrago2.png';
+import Pavimento from './Textures/Pavimento.png';
+import MuroErba from './Textures/MuroErba.png';
+import Legno from './Textures/Legno.png';
+import Yellow from './Textures/Yellow.jpg';
+import Cuore from './Textures/Cuore.png';
+import Muretto from './Textures/Muretto.png';
+import BlueCave from './Backgrounds/BlueCave.jpg';
+import DarkCave from './Backgrounds/DarkCave.jpg';
+import Skybox from './Backgrounds/SkyBox.png';
+import Pippo from './Personaggi/Pippo.png';
 
 export default class ResourceManager{
-    public static Cells() {
+    public static Textures() {
         return{
-            EmptyCell: emptyCell,
-            FullCell: fullCell
-        }
-    }
-
-    public static Rooms(){
-        return{
-            Corridoio: corridoio,
-            Stanza: stanza,
-            PiccoloCorridoio: piccoloCorridoio,
-            PiccoloMuro: piccoloMuro,
-            StanzaCurativa: stanzaCurativa,
-            StanzaTeletrasporto: stanzaTeletrasporto
+            MuroGrezzo,
+            TerrenoDrago,
+            MuroErba,
+            Pavimento,
+            Legno,
+            Cuore,
+            Yellow,
+            Muretto
         }
     }
 
     public static Backgrounds(){
         return{
-            BlueCave: blueCave,
-            DarkCave: darkCave,
-            SkyBox: skybox,
+            BlueCave,
+            DarkCave,
+            Skybox
         }
     }
 
     public static Personaggi(){
         return{
-            Pippo: pippo
+            Pippo
         }
     }
 }
